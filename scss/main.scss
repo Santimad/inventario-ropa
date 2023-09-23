@@ -1,0 +1,44 @@
+@import "partials/table";
+
+*{ box-sizing: border-box; }
+
+html{
+  font-family: sans-serif;
+}
+a {
+  text-decoration: none;
+}
+i{
+  font-size:1.5rem;
+}
+ul{
+  list-style-type: none;
+  display:flex;
+  padding: 0;
+
+
+  li{
+    padding: 0 .25rem;
+  }
+}
+
+.star-gold{
+  color: gold;
+}
+
+.producto_descripcion{
+  //text-align: justify;
+  width:90%;
+  padding: 0;
+  //font-size: 1rem;
+}
+.btn_back {
+  font-size: 2rem;
+  font-weight: thin;
+}
+.arrow_left {
+  vertical-align: middle;
+}
+.producto_titulo {
+  padding:0 .5em;
+}

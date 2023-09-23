@@ -1,0 +1,87 @@
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+table th, table td {
+  padding: 4px 2px;
+}
+table caption {
+  padding: 8px 2px;
+  text-align: start;
+}
+
+table th:nth-child(1) {
+  width: 25%;
+  text-align: start;
+}
+
+table th:nth-child(2) {
+  width: 65%;
+  text-align: start;
+  text-indent: 2px;
+}
+
+table th:nth-child(3) {
+  width: 15%;
+}
+
+table td:nth-child(2) {
+  text-indent: 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+table td:nth-child(3) {
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+i {
+  font-size: 1.5rem;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+}
+ul li {
+  padding: 0 0.25rem;
+}
+
+.star-gold {
+  color: gold;
+}
+
+.producto_descripcion {
+  width: 90%;
+  padding: 0;
+}
+
+.btn_back {
+  font-size: 2rem;
+  font-weight: thin;
+}
+
+.arrow_left {
+  vertical-align: middle;
+}
+
+.producto_titulo {
+  padding: 0 0.5em;
+}
+
+/*# sourceMappingURL=style.css.map */

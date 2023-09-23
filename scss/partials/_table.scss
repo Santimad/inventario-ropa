@@ -1,0 +1,42 @@
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  //border: 1px solid black;
+
+  th, td{
+    //border: 1px solid black;
+    padding: 4px 2px;
+    //font-size: 1.2rem;
+  }
+  caption {
+    padding: 8px 2px;
+    text-align: start;
+  }
+}
+
+table
+th:nth-child(1){
+  width: 25%;
+  text-align: start;
+}
+table
+th:nth-child(2){
+  width: 65%;
+  text-align: start;
+  text-indent: 2px;
+}
+table 
+th:nth-child(3) {
+  width: 15%;
+}
+
+table td:nth-child(2){
+  text-indent: 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+table td:nth-child(3){
+  text-align: center;
+}
