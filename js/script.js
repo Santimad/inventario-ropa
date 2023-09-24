@@ -1,24 +1,95 @@
-let titulo_pagina = document.querySelector('h1');
-titulo_pagina.textContent = "Listado de productos";
+let titlePage = document.querySelector('h1');
+titlePage.textContent = "Listado de productos";
 
 fetch("productos.json")
   .then(response => response.text())
-  .then(productos => localStorage.setItem('productos', products));
+  .then(productos => init(productos));
 //No sé porque no fué suficiente con response.json()
 //tuve que tomar la ruta larga  
-let listOfProducts = JSON.parse(localStorage.getItem('products'));
-//alert(listaDeProductos[0].codigo);
+let listOfProducts = JSON.parse(localStorage.getItem('productos'));
 
-try{
-  document.body.innerHTML = "";
-  document.body.append(createTable(listOfProducts));
-}
-catch(err){
-  alert(err);
+if(localStorage.length){
+  localStorage.clear();
 }
 
-function createPageOfProduct(item){
-  alert(item.codigo);
+function init(p) {
+  let arrayOfProducts = JSON.parse(p);
+  try{
+  //document.body.innerHTML = "";
+    window["content-table"].append(createTable(arrayOfProducts));
+  }
+  catch(err){
+    alert(err);
+  }
+}
+function say() {
+  alert("Hola mundo");
+}
+function createPageOfProduct(item, callback){
+  const firstParagraph = document.body.querySelector("p");
+
+  titlePage.textContent = item.codigo;
+  titlePage.classList.add("producto_titulo");
+  firstParagraph.hidden = true;
+  window["content-table"].innerHTML = "";
+  const section = document.createElement("section");
+  section.innerHTML = 
+    `<div class="row">
+      <div class="col-12">
+      <h2>
+	Descripción
+      </h2>
+      </div>
+    </div>
+    <div class="row producto">
+      <div class="col-6">
+	<p class="producto_descripcion">
+	  ${item.descripcion}
+	</p>
+	<p class="producto_descripcion">
+	  ${item["descripcion-extra"]}
+	</p>
+      </div>
+      <div class="col-6">
+	<img height=196 width=256
+	src="${item.imagen}" alt""
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+      <h3 class="precio"> ${item.precio} </h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+      <ul class="puntuacion">
+      </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+      <a href="" class="btn_back">
+	<img height=32 width=32 class="arrow_left"
+	src="icons/left-arrow.png" alt="Fecha izquierda para volver atrás"/>
+	<span class="arrow-left">
+	Volver
+	</span>
+      </a>
+      </div>
+    </div> `;
+  document.body.append(section);
+  section.onload = callback();
+  
+  
+  //setTimeout(() => {
+  //  window["content-item"].append(h2);
+  //}, 1000);
+
+  /*
+  product_description.innerHTML = 
+  `<p class="producto_descripcion"> ${item.descripcion}  </p>
+   <p class="producto_descripcion"> ${item["descripcion-extra"]} </p>`;
+*/
 }
 
 function createTable(products){
@@ -44,7 +115,16 @@ function createTable(products){
 	  row_cell.innerHTML = `<img height=32 width=32
 				src="icons/acercarse.png" alt="lupa para examinar"/>`;
 	  row_cell.addEventListener("click", () => {
-	    createPageOfProduct(products[i]);  
+	    createPageOfProduct(products[i], () => {
+	      const score = document.querySelector(".puntuacion");
+	      let stop = products[i].puntuacion.length;
+	      for (let i = 0; i <= stop; i++){
+		//alert(i);
+		const star = document.createElement("li");
+		star.innerHTML = `<i class="fa-solid fa-star star-gold"></i>`;
+		score.append(star);
+	      }
+	    });  
 	    localStorage.setItem(products[i].codigo, products[i]);
 	  });
 	  break;
