@@ -4,9 +4,6 @@ titlePage.textContent = "Listado de productos";
 fetch("productos.json")
   .then(response => response.text())
   .then(productos => init(productos));
-//No sé porque no fué suficiente con response.json()
-//tuve que tomar la ruta larga  
-let listOfProducts = JSON.parse(localStorage.getItem('productos'));
 
 if(localStorage.length){
   localStorage.clear();
@@ -14,16 +11,13 @@ if(localStorage.length){
 
 function init(p) {
   let arrayOfProducts = JSON.parse(p);
+  const contentList = document.getElementById("content-table");
   try{
-  //document.body.innerHTML = "";
-    window["content-table"].append(createTable(arrayOfProducts));
+    contentList.append(createTable(arrayOfProducts));
   }
   catch(err){
     alert(err);
   }
-}
-function say() {
-  alert("Hola mundo");
 }
 function createPageOfProduct(item, callback){
   const firstParagraph = document.body.querySelector("p");
@@ -98,12 +92,9 @@ function createTable(products){
   const table_header = createTableHeader();
 
   for(let i = 0; i <= products.length - 1; i++) {
-
     const row = document.createElement("tr");
-
     for(let td = 1; td <= 3; td++){
       const row_cell = document.createElement("td");
-
 	switch(td){
 	case 1:
 	  row_cell.textContent = products[i].codigo;
@@ -118,7 +109,7 @@ function createTable(products){
 	    createPageOfProduct(products[i], () => {
 	      const score = document.querySelector(".puntuacion");
 	      let stop = products[i].puntuacion.length;
-	      for (let i = 0; i <= stop; i++){
+	      for (let i = 0; i < stop; i++){
 		//alert(i);
 		const star = document.createElement("li");
 		star.innerHTML = `<i class="fa-solid fa-star star-gold"></i>`;
@@ -129,9 +120,7 @@ function createTable(products){
 	  });
 	  break;
 	}
-
       row.append(row_cell);
-
     }
 
     caption.textContent = "Lista de productos";
@@ -166,6 +155,40 @@ function createTableHeader() {
   
   return thead;
 }
+/* Si agrego esta funcion se rompe
+function createTableBody(products){
 
+  for(let i = 0; i <= products.length - 1; i++) {
+    const row = document.createElement("tr");
+    for(let td = 1; td <= 3; td++){
+      const row_cell = document.createElement("td");
+	switch(td){
+	case 1:
+	  row_cell.textContent = products[i].codigo;
+	  break;
+	case 2:
+	  row_cell.textContent = products[i].descripcion;
+	  break;
+	case 3:
+	  row_cell.innerHTML = `<img height=32 width=32
+				src="icons/acercarse.png" alt="lupa para examinar"/>`;
+	  row_cell.addEventListener("click", () => {
+	    createPageOfProduct(products[i], () => {
+	      const score = document.querySelector(".puntuacion");
+	      let stop = products[i].puntuacion.length;
+	      for (let i = 0; i < stop; i++){
+		//alert(i);
+		const star = document.createElement("li");
+		star.innerHTML = `<i class="fa-solid fa-star star-gold"></i>`;
+		score.append(star);
+	      }
+	    });  
+	    localStorage.setItem(products[i].codigo, products[i]);
+	  });
+	  break;
+	}
+      row.append(row_cell);
+    }
 
- 
+}
+*/ 

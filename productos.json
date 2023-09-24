@@ -4,7 +4,23 @@
     "descripcion":"Pantalón negro deportivo de la Temporada Primavera—Verano. Posee una contextura liviana, ideal para realizar actividades al aire libre. Disponible únicamente en color negro y en talle XL. Material: poliéster y elastano. Lugar de fabricación: China.",
     "descripcion-extra":"Muy cómodo y ligero, además de una estética excepcional.",
     "imagen":"",
-    "precio":"8,240.00",
+    "precio":"$8,240.00",
+    "puntuacion":"*****"
+  },
+  {
+    "codigo":"Pantalón negro deportivo",
+    "descripcion":"Posee una contextura flexible y resistente, se adapta muy bien a los movimientos del cuerpo. Tiene dos bolsillos con cierre y cordón para ajustar a la cintura. Disponible en color negro y talle XL. Material: poliester. Industria argentina.",
+    "descripcion-extra":"",
+    "imagen":"",
+    "precio":"$7.200,00",
+    "puntuacion":"*****"
+  },
+  {
+    "codigo":"Jersey ciclista",
+    "descripcion":"Jersey para ciclismo con diseño estampado. Incluye bolsillos en la parte trasera para guardar agua y utilidades. Disponible en talle XXL, XL y L. Fabricado en Argintina.",
+    "descripcion-extra":"Hecho de material anti-transpirante, indispensable para realizar esta actividad.",
+    "imagen":"",
+    "precio":"$9.200,00",
     "puntuacion":"*****"
   }
 ]
