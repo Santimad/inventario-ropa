@@ -133,7 +133,7 @@ function createTable(products){
   return table;
 }
 
-function createTableHeader() {
+export function createTableHeader() {
   const thead = document.createElement("thead");
   const header_row = document.createElement("tr");
   const table_headers = [];
