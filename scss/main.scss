@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 @import "partials/table";
-
 *{ box-sizing: border-box; }
 
 html{
@@ -20,6 +20,13 @@ ul{
   li{
     padding: 0 .25rem;
   }
+}
+
+
+p:first-of-type {
+  //color: green;
+  font-family: Roboto, sans-serif;
+  font-size: 1.2rem;  
 }
 
 .star-gold{

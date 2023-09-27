@@ -1,45 +1,29 @@
-const listOfProducts1 = 
-[
-  {
-    "codigo":"Pantalón negro OUTDOOR",
-    "descripcion":"Pantalón negro deportivo de la Temporada Primavera—Verano. Posee una contextura liviana, ideal para realizar actividades al aire libre. Disponible únicamente en color negro y en talle XL. Material: poliéster y elastano. Lugar de fabricación: China.",
-    "descripcion-extra":"Muy cómodo y ligero, además de una estética excepcional.",
-    "imagen":"",
-    "precio":"$8,240.00",
-    "puntuacion":"*****"
-  },
-  {
-    "codigo":"Pantalón negro deportivo",
-    "descripcion":"Posee una contextura flexible y resistente, se adapta muy bien a los movimientos del cuerpo. Tiene dos bolsillos con cierre y cordón para ajustar a la cintura. Disponible en color negro y talle XL. Material: poliester. Industria argentina.",
-    "descripcion-extra":"",
-    "imagen":"",
-    "precio":"$7.200,00",
-    "puntuacion":"*****"
-  },
-  {
-    "codigo":"Jersey ciclista",
-    "descripcion":"Jersey para ciclismo con diseño estampado. Incluye bolsillos en la parte trasera para guardar agua y utilidades. Disponible en talle XXL, XL y L. Fabricado en Argentina.",
-    "descripcion-extra":"Hecho de material anti-transpirante, indispensable para realizar esta actividad.",
-    "imagen":"",
-    "precio":"$9.200,00",
-    "puntuacion":"*****"
-  }
-];
-
 let listOfProducts2;
 //alert(items[0].codigo);
 
+//Lee el archivo de productos y lo pasa como parámetro a la función inicio
 fetch("productos.json")
-  .then(response => response.text())
-  .then(json => {
-    //inicio(JSON.parse(json));
-    listOfProducts2 = JSON.parse(json);
-    inicio(listOfProducts2); 
-  });
+  .then(response => response.json())
+  .then(json => inicio(json));
 
-//window.onload = inicio;
+const loadJson = async (url) => {
+  let response = await fetch(url);
 
-function cleanBody(){
+  if(response.status == 200){
+    let json = await response.json();
+  }
+  else {
+    throw new Error(response.status);
+  }
+} 
+
+window.onload = () => {
+  const json = loadJson("productos.json");
+
+  alert(json);
+};
+
+const cleanBody = () => {
   document.body.innerHTML = "";
 }
 
@@ -94,6 +78,7 @@ function createTable(listOfProducts){
   
   const caption = document.createElement("caption");
   const table_header = createTableHeader();
+  const table_body = document.createElement("tbody");
 
   for(let i = 0; i <= listOfProducts.length - 1; i++) {
     const row = document.createElement("tr");
@@ -112,13 +97,14 @@ function createTable(listOfProducts){
       row.append(row_cell);
     }
 
-    table.append(row);
+    table_body.append(row);
 
   }
     
-  caption.textContent = "Lista de productos";
+  caption.textContent = `Listado de productos actualizado ${new Date().toDateString()}`;
   table.append(caption);
   table.append(table_header);
+  table.append(table_body);
 
 
   return table;
@@ -156,10 +142,10 @@ function loadPageOfProduct(listOfProducts , product) {
   document.body.append(title);
   document.body.innerHTML += template;
   const volver = document.querySelector(".btn_back");
-  const score = document.querySelector(".puntuacion");
+  const score = document.querySelector(".score");
   
-  let stop = product.puntuacion.length;
-    for (let i = 0; i < stop; i++){
+  let length = product.puntuacion.length;
+    for (let i = 0; i < length; i++){
       //alert(i);
       const star = document.createElement("li");
       star.innerHTML = `<i class="fa-solid fa-star star-gold"></i>`;
@@ -191,18 +177,18 @@ function createTemplateString(product){
         </p>
       </div>
       <div class="col-6">
-        <img height=196 width=256
+        <img height=256 width=256
         src="${product.imagen}" alt""
       </div>
     </div>
     <div class="row">
       <div class="col-12">
-      <h2 class="precio"> ${product.precio} </h2>
+      <h3 class="precio"> Precio ${product.precio} </h3>
       </div>
     </div>
     <div class="row">
       <div class="col-12">
-      <ul class="puntuacion">
+      <ul class="score">
       </ul>
       </div>
     </div>
@@ -211,8 +197,8 @@ function createTemplateString(product){
       <a href="" class="btn_back">
         <img height=32 width=32 class="arrow_left"
         src="icons/left-arrow.png" alt="Fecha izquierda para volver atrás"/>
-        <span class="arrow-left">
-        Volver
+        <span class="arrow_left">
+        back
         </span>
       </a>
       </div>
@@ -228,6 +214,10 @@ function inicio(listOfProducts) {
     alert(err);
   }
 }
+
+document.documentElement.addEventListener('click', (event) => {
+  alert(event.target.parentNode.classList);
+})
 /*
  * 
           row_cell.addEventListener("click", () => {
