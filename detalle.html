@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Listado de productos </title>
+  <title></title>
 
   <link rel="shortcut icon" href="img/camiseta.png" type="img/png">
 
@@ -16,21 +16,38 @@
 
 </head>
 <body>
-  <h1> Listado de productos </h1>
-  <p>Este es un inventario con los nuevos artículos deportivos disponibles para esta Temporada Primavera—Verano del vigente año 2023.</p>
-  <section id="table-content">
-    <table>
-      <thead>
-	<tr>
-	  <th scope="row"> Producto </th>
-	  <th scope="row"> Descripción </th>
-	  <th scope="row"> Ver más </th>
-	</tr>
-      </thead>
-      <tbody> </tbody>
-    </table>
-  </section>
-    
-  <script src="js/script4.js"></script>
+  <div class="row">
+    <div class="col-12 padding-0">
+      <h2>
+	Descripción
+      </h2>
+    </div>
+    <div class="row">
+      <div id="description" class="col-6"></div>
+      <div id="img" class="col-6 center"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div id="price" class="col-12"></div>
+  </div>
+  <div class="row">
+    <div id="score" class="col-12">
+      <span>
+	<strong> Valoración: </strong>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12" id="btn">
+      <a href="" class="btn_back">
+        <img height=16 width=16 class="arrow_left"
+        src="icons/left-arrow.png" alt="Fecha izquierda para volver atrás"/>
+        <span class="arrow_left">
+        Volver
+        </span>
+      </a>
+    </div>
+  </div>
+<script src="js/script4.js" ></script>
 </body>
 </html>

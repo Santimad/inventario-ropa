@@ -6,8 +6,6 @@
 [class*="col-"] {
     float:left;
     width: 100%;
-    padding: 0 1em;
-    border: solid black;
   }
 @media only screen and (min-width: 476px){
 .col-1 {width: 8.33%;}

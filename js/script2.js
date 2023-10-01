@@ -2,26 +2,30 @@ let listOfProducts2;
 //alert(items[0].codigo);
 
 //Lee el archivo de productos y lo pasa como parámetro a la función inicio
-fetch("productos.json")
-  .then(response => response.json())
-  .then(json => inicio(json));
+//fetch("productos.json")
+//  .then(response => response.json())
+//  .then(json => inicio(json));
 
 const loadJson = async (url) => {
   let response = await fetch(url);
 
-  if(response.status == 200){
+  if(response.status === 200){
     let json = await response.json();
+    return json;
   }
   else {
     throw new Error(response.status);
   }
 } 
 
-window.onload = () => {
-  const json = loadJson("productos.json");
-
-  alert(json);
-};
+(async () => {
+  inicio(await loadJson("productos.json"));
+})();
+//window.onload = async () => {
+//  const json = await loadJson("productos.json");
+//
+//  inicio(json);
+//};
 
 const cleanBody = () => {
   document.body.innerHTML = "";
@@ -73,16 +77,33 @@ function createTitlePage(str){
 }
 
 function createTable(listOfProducts){
-  //alert(listOfProducts)
-  const table = document.createElement("table");
-  
+  const table = document.createElement("table"); 
   const caption = document.createElement("caption");
+
   const table_header = createTableHeader();
-  const table_body = document.createElement("tbody");
+  const table_body = createTableBody(listOfProducts); 
+
+  caption.textContent = `Listado de productos actualizado ${new Date().toDateString()}`;
+    
+  table.append(caption);
+  table.append(table_header);
+  table.append(table_body);
+
+
+  return table;
+
+}
+
+const createTableBody = function(listOfProducts){
+
+  const body = document.createElement('tbody');
 
   for(let i = 0; i <= listOfProducts.length - 1; i++) {
+
     const row = document.createElement("tr");
+
     for(let td = 1; td <= 3; td++){                                                                   const row_cell = document.createElement("td");
+
         switch(td){
         case 1:
           row_cell.textContent = listOfProducts[i].codigo;
@@ -94,21 +115,15 @@ function createTable(listOfProducts){
                                 src="icons/acercarse.png" alt="lupa para examinar"/>`;
 	  break;
         }	
+
       row.append(row_cell);
     }
 
-    table_body.append(row);
+    body.append(row);
 
   }
-    
-  caption.textContent = `Listado de productos actualizado ${new Date().toDateString()}`;
-  table.append(caption);
-  table.append(table_header);
-  table.append(table_body);
 
-
-  return table;
-
+  return body;
 }
 
 function createTableHeader() {
@@ -116,8 +131,8 @@ function createTableHeader() {
   const header_row = document.createElement("tr");
   const table_headers = [];
 
-  for(let i = 0; i <= 2; i++){
-    table_headers[i]= document.createElement("th");                                                     table_headers[i].setAttribute('scope','row');
+  for(let i = 0; i < 3; i++){
+    table_headers[i]= document.createElement("th");                                                table_headers[i].setAttribute('scope','row');
   }
 
   table_headers[0].textContent = "Productos";
@@ -216,7 +231,7 @@ function inicio(listOfProducts) {
 }
 
 document.documentElement.addEventListener('click', (event) => {
-  alert(event.target.parentNode.classList);
+  //alert(event.target.parentNode.classList);
 })
 /*
  * 
