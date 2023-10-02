@@ -1,14 +1,5 @@
 'use strict';
 
-window.onload = (event) => {
-  if(window.location == "http://192.168.0.9:8080/productos/"){
-    //alert('ok');
-    event.stopPropagation();
-  }
-  else{
-    //loadDetailPage();
-  }
-};
 
 const loadJson = (url) => {
 
@@ -52,9 +43,9 @@ function createRow(product) {
     </td>`;
   row.innerHTML = template;
   row.cells[2].addEventListener('click', () => {
-    if(localStorage.getItem('product.codigo') == null){
-      localStorage.setItem(product.id, JSON.stringify(product));
-    }
+    localStorage.clear();
+    localStorage.setItem(product.id, JSON.stringify(product));
+
     redirect("detalle.html");
 
   });
@@ -69,7 +60,6 @@ const loadDetailPage = function(product) {
   } 
 
   item = JSON.parse(item);
-  localStorage.removeItem(item.id);
 
   const title = document.querySelector('title');
   const description = document.querySelector('#description');
@@ -83,6 +73,7 @@ const loadDetailPage = function(product) {
   button.addEventListener('click', (event) => {
     event.preventDefault();
     redirect("");
+    localStorage.removeItem(item.id);
   });
 
   const heading = createHeading(item.codigo);
@@ -92,6 +83,7 @@ const loadDetailPage = function(product) {
   title.textContent = `Detalle ${item.id}`;
   description.innerHTML = `<p class="producto_descripcion"> ${item.descripcion} </p>
         		   <p class="producto_descripcion"> ${item["descripcion-extra"]} </p>`;
+
   img.src = item.imagen ? item.imagen : "img/no-img.png";
   img.setAttribute('width', 256);
   img.setAttribute('height', 256);
