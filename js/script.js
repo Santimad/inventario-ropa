@@ -16,10 +16,10 @@ const generateHTML = function(product){
   const tbody = document.querySelector('table tbody');
   let row;
 
-  if(window.location == "http://192.168.0.9:8080/productos/"){  
+  if(window.location == "https://santimad.github.io/inventario-ropa/"){  
     row = createRow(product);
   }
-  else if(window.location == "http://192.168.0.9:8080/productos/detalle.html"){
+  else if(window.location == "https://santimad.github.io/inventario-ropa/detalle.html"){
     loadDetailPage(product);
     return;
   }
@@ -28,7 +28,7 @@ const generateHTML = function(product){
 }
 
 const redirect = (str) => {
-  const BASE_URL = "http://192.168.0.9:8080/productos/";
+  const BASE_URL = "https://santimad.github.io/inventario-ropa/"
   window.location = BASE_URL + str;
 }
 
